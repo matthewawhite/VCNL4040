@@ -10,11 +10,11 @@
 #define ALS_CONF 0x00
 #define ALS_THDH 0x01
 #define ALS_THDL 0x02
-#define PS_CONF1_2 0x03 // TODO: Should this be PS_CONF1?
+#define PS_CONF1_2 0x03
 #define PS_CONF3 0x04
-#define PS_CANC 0x05 //Register for setting cross talk cancellation level
-#define PS1_THDL 0x06 // TODO: check for PS1_THD definition
-#define PS2_THDH 0x07
+#define PS_CANC 0x05
+#define PS_THDL 0x06
+#define PS_THDH 0x07
 #define PS_DATA 0x08
 #define ALS_DATA 0x09
 #define White_DATA 0x0A
@@ -24,27 +24,24 @@
 #define FALSE 0x02
 #define INT_PIN p5
 
-typedef char BYTE; // TODO: make sure this is correct
-typedef short WORD; // TODO: make sure this is correct
-
-static BYTE int_flag[8];
+static char int_flag[8];
 
 class VCNL4040 {
     public:
-        // Create instance of class:
         VCNL4040(PinName sda, PinName scl);
         //----------------------------------------------------------------------// FUNCTION NAME: set_als_cmd_disable_int
         //
         // DESCRIPTION:
-        // Configures ALS for personal settings (datasheet pg. 9) and specifically for disabling the interrupt pin //----------------------------------------------------------------------
+        // Configures ALS for personal settings and specifically for disabling
+        // the interrupt pin //----------------------------------------------------------------------
         void set_als_cmd_disable_int(void);
 
         //----------------------------------------------------------------------
         // FUNCTION NAME: set_als_cmd_enable_int
         //
         // DESCRIPTION:
-        // Configures ALS for personal settings (datasheet pg. 9) and specifically for
-        // enabling the interrupt pin
+        // Configures ALS for personal settings and specifically for enabling
+        // the interrupt pin
         //----------------------------------------------------------------------
         void set_als_cmd_enable_int(void);
 
@@ -54,14 +51,14 @@ class VCNL4040 {
         // DESCRIPTION:
         // Sets thresholds for the ALS to set value of INT pin
         //----------------------------------------------------------------------
-        void set_als_int_thd(WORD thd_high, WORD thd_Low);
+        void set_als_int_thd(short thd_high, short thd_Low);
 
         //----------------------------------------------------------------------
         // FUNCTION NAME: set_ps_cmd1
         //
         // DESCRIPTION:
-        // Configures PS to custom settings such as INT triggers, output size, interrupt
-        // persistence on pg. 10
+        // Configures PS to custom settings such as INT triggers, output size,
+        // interrupt
         //----------------------------------------------------------------------
         void set_ps_cmd1(void);
 
@@ -69,7 +66,7 @@ class VCNL4040 {
         // FUNCTION NAME: set_ps_cmd2
         //
         // DESCRIPTION:
-        // Further configures PS for active force trigger, smart persistence on pg. 10
+        // Further configures PS for active force trigger
         //----------------------------------------------------------------------
         void set_ps_cmd2(void);
 
@@ -77,10 +74,9 @@ class VCNL4040 {
         // FUNCTION NAME: set_ps_thd
         //
         // DESCRIPTION:
-        // Configure high and low threshold values for the INT pin working with the PS.
-        // Threshold info on pg. 8 of datasheet
+        // Configure high and low threshold values for PS INT pin
         //----------------------------------------------------------------------
-        void set_ps_thd(BYTE ps1_thdl, BYTE ps1_thdh);
+        void set_ps_thd(short ps_thdl, short ps_thdh);
 
         //----------------------------------------------------------------------
         // FUNCTION NAME: read_VCNL4040_als
@@ -88,16 +84,15 @@ class VCNL4040 {
         // DESCRIPTION:
         // Reading ambient light sensor values, not being implemented for now
         //----------------------------------------------------------------------
-        WORD read_VCNL4040_als(void);
+        short read_VCNL4040_als(void);
 
         //----------------------------------------------------------------------
         // FUNCTION NAME: read_VCNL4040_ps
         //
         // DESCRIPTION:
         // Reading the 16 bit data from the PS
-        // I added this based off of the function provided above
         //----------------------------------------------------------------------
-        WORD read_VCNL4040_ps(void);
+        short read_VCNL4040_ps(void);
 
         //----------------------------------------------------------------------
         // FUNCTION NAME: read_VCNL4040_int_flag
@@ -120,12 +115,12 @@ class VCNL4040 {
         // DESCRIPTION:
         // Reads the device ID register
         //----------------------------------------------------------------------
-        void read_VCNL4040_ID(WORD *id);
+        void read_VCNL4040_ID(short *id);
 
     private:
         I2C i2c;
-        BYTE send[3];
-        BYTE received[2];
+        char send[3];
+        char received[2];
 };
 
 #endif
