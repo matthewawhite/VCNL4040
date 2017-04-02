@@ -1,6 +1,6 @@
 # VCNL4040
 
-NOTES regarding notation used and other facts about sensor:
+NOTES regarding notation used and other facts about sensor: <br>
 PS = proximity sensor 
 ALS = ambient light sensor
 Reg_num = register number 
