@@ -1,15 +1,8 @@
 # VCNL4040
+This is the code developed for the VCNL4040 proximity sensor for the purpose of increasing better ball detection for the robots.
 
-NOTES regarding notation used and other facts about sensor: <br>
-PS = proximity sensor <br>
-ALS = ambient light sensor <br>
-Reg_num = register number <br>
-THD = threshold <br>
-CONFG = configuration <br>
-INT = interrupt (active high) <br>
-Persistence = num consecutive hits to pull INT low <br>
-I2C diagram shows data byte low then byte high all after command code <br>
-For the PS, the output will be subtracted by the value set in PS_CANC <br>
-Max PS detection with Kodak white card = 200 mm <br>
-White channel can help determine kind of light source <br>
-Read is | 1 and write is | 0
+# Setup
+Check the pin locations for the sensor in the datasheet and connect to the respective pins on a microcontroller (the software was developed with the ARM Mbed for testing and may not work with other microcontrollers)
+
+# Data
+At the moment, the data the sensor is being returned is not in any understandable units such as cm, and so data was collected for a rough formula that connects the returned value to cm however this needs to be vastly improved.
